@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mongoose Task app</title>
+</head>
+
+<body>
+  <h1>Mongoose Task App</h1>
+
+  <div>
+    <h2>Add a task</h2>
+    <form action="/tasks" method="POST">
+      <input type="text" placeholder="name" name="name">
+      <input type="text" placeholder="status" name="status">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>Update a task</h2>
+    <input id="update" type="text" placeholder="Input an ID" >
+    <input id="updateName" type="text" placeholder="name">
+    <input id="updateStatus" type="text" placeholder="status">
+    <button id="updateBtn" id=type="submit">Submit</button>
+
+  </div>
+
+  <div>
+    <h2>Delete a task</h2>
+    <input id="delete" type="text" placeholder="Input an ID" >
+    <button id="delBtn" type="submit">Submit</button>
+
+  </div>
+
+  <script>
+    let update = document.getElementById('update');
+    let updateName = document.getElementById('updateName');
+    let updateStatus = document.getElementById('updateStatus');
+    let updateBtn = document.getElementById('updateBtn');
+
+    updateBtn.addEventListener('click', () => {
+      fetch('tasks/'+update.value, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          'name': updateName.value,
+          'status': updateStatus.value,
+        }),
+      }).then(res => {
+        if (res.ok) return res.json();
+      }).then(data => {
+        console.log(data);
+        window.location.reload(true);
+      });
+    });
+
+
+    let del = document.getElementById('delete');
+    let delBtn = document.getElementById('delBtn');
+
+    delBtn.addEventListener('click', () => {
+      fetch('tasks/'+del.value, {
+        method: 'delete',
+      }).then(res => {
+        if (res.ok) return console.log('response is ok');
+      }).then(data => {
+        console.log(data);
+        window.location.reload(true);
+      });
+    });
+
+
+  </script>
+
+
+</body>
+</html>
