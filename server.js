@@ -15,9 +15,16 @@ app.set("view engine", "ejs");
 //mongoose instance connection url
 mongoose.Promise = global.Promise;
 const dbs = require('./config/db');
+//local DB
 // mongoose.connect('mongodb://localhost/mongoosedb');
+var url = process.env.MONGOLAB_URI;
 
-mongoose.connect(dbs.url || process.env.PROD_MONGODB);
+
+// mongoose.connect(dbs.url);
+
+//for heroku
+mongoose.connect(url);
+
 //LISTEN SERVER
 
 const port = process.env.PORT || 3000;
