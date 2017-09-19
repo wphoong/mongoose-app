@@ -14,11 +14,12 @@ app.set("view engine", "ejs");
 
 //mongoose instance connection url
 mongoose.Promise = global.Promise;
-const dbs = require('./config/db');
-//local DB
-// mongoose.connect('mongodb://localhost/mongoosedb');
-var url = process.env.MONGOLAB_URI;
 
+//local DB
+// const dbs = require('./config/db');
+// mongoose.connect('mongodb://localhost/mongoosedb');
+
+var url = process.env.MONGOLAB_URI;
 
 // mongoose.connect(dbs.url);
 
