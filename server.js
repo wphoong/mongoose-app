@@ -14,8 +14,9 @@ app.set("view engine", "ejs");
 
 //mongoose instance connection url
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mongoosedb');
-
+const dbs = require('./config/db');
+// mongoose.connect('mongodb://localhost/mongoosedb');
+mongoose.connect(dbs.url);
 //LISTEN SERVER
 
 const port = process.env.PORT || 3000;
